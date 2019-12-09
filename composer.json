@@ -1,0 +1,27 @@
+{
+    "name": "mhe/silverstripe-matomo",
+    "description": "Silverstripe module to include Matomo analytics tool",
+    "type": "silverstripe-vendormodule",
+    "authors": [
+        {
+            "name": "Martin Heise",
+            "email": "info@martinheise.de"
+        }
+    ],
+    "require": {
+        "silverstripe/recipe-cms": "^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "extra": {
+        "branch-alias": {
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Mhe\\Matomo\\": "src/",
+            "Mhe\\Matomo\\Tests\\": "tests/"
+        }
+    }
+}
