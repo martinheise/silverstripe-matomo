@@ -46,7 +46,6 @@ class MatomoConfig extends DataExtension {
 		$fields->addFieldToTab('Root.Matomo', CheckboxField::create('MatomoActive', $this->owner->fieldLabel('MatomoActive')));
 		$fields->addFieldToTab('Root.Matomo', TextField::create('MatomoURL', $this->owner->fieldLabel('MatomoURL')));
 		$fields->addFieldToTab('Root.Matomo', NumericField::create('MatomoSiteID', $this->owner->fieldLabel('MatomoSiteID')));
-		$fields->addFieldToTab('Root.Matomo', LiteralField::create('UsageHint', _t(__CLASS__ . '.USAGE_HINT', 'At least $MatomoTrackingCodeHead should be in your Page.ss template')));
 	}
 
 	public function UseMatomo() {

@@ -3,6 +3,3 @@ de:
     db_MatomoActive: 'Tracking aktivieren'
     db_MatomoURL: 'Tracking URL'
     db_MatomoSiteID: 'Site-ID'
-  Mhe\Matomo\Extensions\MatomoConfig:
-    USAGE_HINT: 'Ihr Page.ss Template sollte das Tracking per <i>$MatomoTrackingCodeHead</i> einbinden.'
-
