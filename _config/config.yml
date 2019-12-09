@@ -2,3 +2,7 @@
 Name: matomo
 Before: 'app'
 ---
+
+Silverstripe\SiteConfig\SiteConfig:
+  extensions:
+    - 'Mhe\Matomo\Extensions\MatomoConfig'
