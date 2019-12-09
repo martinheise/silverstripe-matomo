@@ -53,6 +53,12 @@ class MatomoConfig extends DataExtension {
 		return ($this->owner->MatomoActive && !empty($this->owner->MatomoURL));
 	}
 
+	public function MatomoURL($cleaned = true) {
+		if (!$cleaned) return $this->owner->MatomoURL;
+		$url = $this->owner->MatomoURL;
+		return preg_replace('!^https?://|^/+|/+$!', '', $url);
+	}
+
 	/*public static function OptOutShortcodeHandler($arguments,$title = null,$parser = null, $tag = null, $extra = null) {
 		$text = _t('MatomoConfig.OPTOUT_Linktext', 'opt out');
 		if (isset($arguments['text'])) $text = $arguments['text'];

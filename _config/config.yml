@@ -6,3 +6,7 @@ Before: 'app'
 Silverstripe\SiteConfig\SiteConfig:
   extensions:
     - 'Mhe\Matomo\Extensions\MatomoConfig'
+
+PageController:
+  extensions:
+    - 'Mhe\Matomo\Extensions\MatomoPageControllerExtension'
