@@ -19,16 +19,23 @@ use SilverStripe\SiteConfig\SiteConfig;
  * Class MatomoConfigTest
  * @package Mhe\Matomo\Tests\Extensions
  *
- * tests for Matome SiteConfig extension
+ * tests for Matomo SiteConfig extension
  */
 class MatomoConfigTest extends SapphireTest
 {
+	protected static $fixture_file = '../fixtures.yml';
+
+	protected function setUp() {
+		parent::setUp();
+		$this->logOut();
+	}
+
 
 	/**
 	 * Getter method for MatomoURL cleans URL by default
 	 */
 	public function testMatomoURL() {
-		$siteconfig = SiteConfig::create();
+		$siteconfig = $this->objFromFixture(SiteConfig::class, 'default');
 
 		$siteconfig->MatomoURL = 'matomo.url.com';
 		$this->assertEquals('matomo.url.com', $siteconfig->MatomoURL());
@@ -47,7 +54,7 @@ class MatomoConfigTest extends SapphireTest
 	 * Matomo is only used when all required properties are set
 	 */
 	public function testUseMatomo() {
-		$siteconfig = SiteConfig::create(['MatomoActive' => true, 'MatomoURL' => 'matomo.url.com', 'MatomoSiteID' => 1]);
+		$siteconfig = $this->objFromFixture(SiteConfig::class, 'default');
 		$this->assertTrue($siteconfig->UseMatomo());
 
 		$siteconfig = SiteConfig::create(['MatomoActive' => true, 'MatomoURL' => 'matomo.url.com', 'MatomoSiteID' => null]);
