@@ -15,13 +15,9 @@ use SilverStripe\View\Requirements;
 
 class MatomoPageControllerExtension extends Extension {
 
-	private static $allowed_actions = [];
-
-	private static $auto_add_tracking_head = true;
-
 	public function onAfterInit() {
 		// automatically add tracking code to page head, if not configured otherwise
-		$auto_add_tracking_head = Config::inst()->get(self::class, 'auto_add_tracking_head');
+		$auto_add_tracking_head = Config::inst()->get(MatomoConfig::class, 'auto_add_tracking_head');
 		if ($auto_add_tracking_head) Requirements::insertHeadTags($this->MatomoTrackingCodeHead());
 	}
 
