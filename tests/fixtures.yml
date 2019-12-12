@@ -1,0 +1,11 @@
+SilverStripe\SiteConfig\SiteConfig:
+  default:
+    Title: 'Test Site'
+    MatomoActive: 1
+    MatomoURL: 'matomo.example.com'
+    MatomoSiteID: 1
+
+Page:
+  home:
+    Title: "Home Page"
+    URLSegment: "home"

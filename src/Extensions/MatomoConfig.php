@@ -12,7 +12,6 @@ namespace Mhe\Matomo\Extensions;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataExtension;
@@ -27,6 +26,16 @@ use SilverStripe\Security\Permission;
  */
 class MatomoConfig extends DataExtension {
 
+	/**
+	 * @config
+	 */
+	private static $track_cms_users = false;
+
+	/**
+	 * @config
+	 */
+	private static $auto_add_tracking_head = true;
+
 	private static $db = [
 		'MatomoActive' => 'Boolean',
 		'MatomoURL' => 'Varchar(255)',
@@ -36,10 +45,6 @@ class MatomoConfig extends DataExtension {
 	private static $defaults = [
 		'MatomoActive' => false
 	];
-
-	public static $track_cms_users = false;
-
-	public static $optout_shortcode_name = 'matomo_optout';
 
 	/**
 	 * configure the additional CMS fields
@@ -55,7 +60,7 @@ class MatomoConfig extends DataExtension {
 		// exclude logged in CMS users from tracking
 		$track_cms_users = Config::inst()->get(self::class, 'track_cms_users');
 		if (!$track_cms_users && Permission::check('CMS_ACCESS_CMSMain')) return false;
-		return ($this->owner->MatomoActive && !empty($this->owner->MatomoURL));
+		return ($this->owner->MatomoActive && !empty($this->owner->MatomoURL) && !empty($this->owner->MatomoSiteID));
 	}
 
 	public function MatomoURL($cleaned = true) {
