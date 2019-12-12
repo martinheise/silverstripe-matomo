@@ -55,7 +55,7 @@ class MatomoConfig extends DataExtension {
 		// exclude logged in CMS users from tracking
 		$track_cms_users = Config::inst()->get(self::class, 'track_cms_users');
 		if (!$track_cms_users && Permission::check('CMS_ACCESS_CMSMain')) return false;
-		return ($this->owner->MatomoActive && !empty($this->owner->MatomoURL));
+		return ($this->owner->MatomoActive && !empty($this->owner->MatomoURL) && !empty($this->owner->MatomoSiteID));
 	}
 
 	public function MatomoURL($cleaned = true) {
