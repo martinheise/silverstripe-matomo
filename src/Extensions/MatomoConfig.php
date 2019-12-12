@@ -9,6 +9,7 @@
 
 namespace Mhe\Matomo\Extensions;
 
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\LiteralField;
@@ -36,6 +37,8 @@ class MatomoConfig extends DataExtension {
 		'MatomoActive' => false
 	];
 
+	public static $track_cms_users = false;
+
 	public static $optout_shortcode_name = 'matomo_optout';
 
 	/**
@@ -50,7 +53,8 @@ class MatomoConfig extends DataExtension {
 
 	public function UseMatomo() {
 		// exclude logged in CMS users from tracking
-		if (Permission::check('CMS_ACCESS_CMSMain')) return false;
+		$track_cms_users = Config::inst()->get(self::class, 'track_cms_users');
+		if (!$track_cms_users && Permission::check('CMS_ACCESS_CMSMain')) return false;
 		return ($this->owner->MatomoActive && !empty($this->owner->MatomoURL));
 	}
 
