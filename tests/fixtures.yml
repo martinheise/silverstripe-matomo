@@ -9,3 +9,7 @@ Page:
   home:
     Title: "Home Page"
     URLSegment: "home"
+  optout:
+    Title: "Opt-Out"
+    URLSegment: "optout"
+    Content: '<div id="optout">[matomo_optout]</div>'

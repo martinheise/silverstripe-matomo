@@ -9,7 +9,7 @@
 
 namespace Mhe\Matomo\Tests\Extensions;
 
-
+use Page;
 use Mhe\Matomo\Extensions\MatomoConfig;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\SapphireTest;
@@ -85,5 +85,15 @@ class MatomoConfigTest extends SapphireTest
 		$this->assertTrue($siteconfig->UseMatomo());
 		$this->logOut();
 		$this->assertTrue($siteconfig->UseMatomo());
+	}
+
+	/**
+	 * Create an Opt-Out via the standard iframe method
+	 */
+	public function testOptOutShortcodeIframe() {
+		Config::modify()->set(MatomoConfig::class, 'optout', array('method' => 'iframe'));
+		$page = $this->objFromFixture(Page::class, 'optout');
+		$content = $page->obj('Content')->RAW();
+		$this->assertContains('<iframe src="https://matomo.example.com/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=en"></iframe>', $content);
 	}
 }
