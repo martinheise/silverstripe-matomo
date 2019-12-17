@@ -21,12 +21,28 @@ class MatomoPageControllerExtension extends Extension {
 		if ($auto_add_tracking_head) Requirements::insertHeadTags($this->MatomoTrackingCodeHead());
 	}
 
+	/**
+	 * Tracking code for page head – usually inserted automatically, @see MatomoPageControllerExtension::onAfterInit()
+	 * @return mixed
+	 */
 	public function MatomoTrackingCodeHead() {
 		return $this->owner->renderWith('MatomoTrackingCodeHead');
 	}
 
+	/**
+	 * optional Tracking code for page body, e.g. tracking image – empty by default
+	 * @return mixed
+	 */
 	public function MatomoTrackingCodeBody() {
 		return $this->owner->renderWith('MatomoTrackingCodeBody');
+	}
+
+	/**
+	 * OptOut code for usage inside templates
+	 * @return \SilverStripe\ORM\FieldType\DBHTMLText
+	 */
+	public function MatomoOptOut($arguments = []) {
+		return MatomoConfig::optout_shortcode_handler($arguments);
 	}
 
 }
