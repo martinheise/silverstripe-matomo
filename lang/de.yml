@@ -3,3 +3,9 @@ de:
     db_MatomoActive: 'Tracking aktivieren'
     db_MatomoURL: 'Tracking URL'
     db_MatomoSiteID: 'Site-ID'
+  Mhe\Matomo\Extensions\MatomoConfig:
+    OPTOUT_FORM_TEXT: '<p>Sie haben die Möglichkeit zu verhindern, dass von Ihnen hier getätigte Aktionen analysiert und verknüpft werden.</p><p>Um die Analyse durch Matomo zu verhindern, deaktivieren Sie bitte die Checkbox.</p>'
+    YOU_ARE_OPTED_OUT: 'Sie haben der Analyse widersprochen. Klicken Sie hier, um zuzustimmen.'
+    YOU_ARE_OPTED_IN: 'Sie sind mit der Analyse einverstanden. Klicken Sie hier, um zu widersprechen.'
+    TRACKING_DEACTIVATED: 'Das Tracking ist zurzeit nicht aktiv'
+

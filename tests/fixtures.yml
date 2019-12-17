@@ -13,3 +13,11 @@ Page:
     Title: "Opt-Out"
     URLSegment: "optout"
     Content: '<div id="optout">[matomo_optout]</div>'
+  optout-iframe:
+    Title: "Opt-Out"
+    URLSegment: "optout"
+    Content: '<div id="optout">[matomo_optout method="iframe"]</div>'
+  optout-script:
+    Title: "Opt-Out"
+    URLSegment: "optout"
+    Content: '<div id="optout">[matomo_optout method="script]</div>'

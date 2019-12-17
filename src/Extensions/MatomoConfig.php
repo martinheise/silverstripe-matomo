@@ -99,6 +99,7 @@ class MatomoConfig extends DataExtension {
 		$urlargs['module'] = 'CoreAdminHome';
 		$urlargs['action'] = 'optOut';
 		$urlargs['language'] =i18n::getData()->langFromLocale(i18n::get_locale());
+		// ToDo: okay to always use https?
 		return 'https://' . $baseurl . '/index.php?' . http_build_query($urlargs);
 	}
 
@@ -115,16 +116,18 @@ class MatomoConfig extends DataExtension {
 	public static function optout_shortcode_handler($arguments, $title = null, $parser = null, $tag = null, $extra = null) {
 		$config = Config::inst()->get(self::class, 'optout');
 		$siteconfig = SiteConfig::current_site_config();
+		$arguments = array_filter($arguments,
+			function ($key) {
+				return in_array($key, ['method']);
+			},
+			ARRAY_FILTER_USE_KEY);
 		if (empty($arguments['method'])) $arguments['method'] = $config['method'];
-
 		$template = 'MatomoOptOutScript';
 		if ($arguments['method'] == 'iframe') {
 			// ToDo: add arguments – both for iframe (e.g.) and for the generated Url
 			$template = 'MatomoOptOutIframe';
+			$arguments['OptoutIframeUrl'] = $siteconfig->MatomoOptOutUrl();
 		}
-		$data = new ArrayData([
-			'OptoutIframeUrl' => $siteconfig->MatomoOptOutUrl()
-		]);
-		return $data->renderWith($template);
+		return $siteconfig->customise($arguments)->renderWith($template);
 	}
 }
