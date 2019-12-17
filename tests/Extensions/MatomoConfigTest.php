@@ -9,7 +9,7 @@
 
 namespace Mhe\Matomo\Tests\Extensions;
 
-
+use Page;
 use Mhe\Matomo\Extensions\MatomoConfig;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\SapphireTest;
@@ -85,5 +85,56 @@ class MatomoConfigTest extends SapphireTest
 		$this->assertTrue($siteconfig->UseMatomo());
 		$this->logOut();
 		$this->assertTrue($siteconfig->UseMatomo());
+	}
+
+	/**
+	 * Create an Opt-Out via the standard iframe method
+	 * either by global config, or by dedicated shortcode argument
+	 */
+	public function testOptOutShortcodeIframe() {
+		Config::modify()->set(MatomoConfig::class, 'optout', array('method' => 'iframe'));
+		$page = $this->objFromFixture(Page::class, 'optout');
+		$content = $page->obj('Content')->RAW();
+		$this->assertContainsOptOutIframe($content);
+
+		$page = $this->objFromFixture(Page::class, 'optout-iframe');
+		$content = $page->obj('Content')->RAW();
+		$this->assertContainsOptOutIframe($content);
+
+		Config::modify()->set(MatomoConfig::class, 'optout', array('method' => 'script'));
+		$page = $this->objFromFixture(Page::class, 'optout-iframe');
+		$content = $page->obj('Content')->RAW();
+		$this->assertContainsOptOutIframe($content);
+	}
+
+	private function assertContainsOptOutIframe($content) {
+		$this->assertContains('<iframe src="https://matomo.example.com/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=en"></iframe>', $content);
+	}
+
+	/**
+	 * Create an Opt-Out via a specific script code, without iframe
+	 * either by global config, or by dedicated shortcode argument
+	 */
+	public function testOptOutShortcodeScript() {
+		Config::modify()->set(MatomoConfig::class, 'optout', array('method' => 'script'));
+		$page = $this->objFromFixture(Page::class, 'optout');
+		$content = $page->obj('Content')->RAW();
+		$this->assertContainsOptOutScript($content);
+
+		$page = $this->objFromFixture(Page::class, 'optout-script');
+		$content = $page->obj('Content')->RAW();
+		$this->assertContainsOptOutScript($content);
+
+		Config::modify()->set(MatomoConfig::class, 'optout', array('method' => 'iframe'));
+
+		$page = $this->objFromFixture(Page::class, 'optout-script');
+		$content = $page->obj('Content')->RAW();
+		$this->assertContainsOptOutScript($content);
+	}
+
+	private function assertContainsOptOutScript($content) {
+		$this->assertContains('<div id="matomo-optout-form">', $content);
+		$this->assertContains('<script>', $content);
+		$this->assertContains('_paq.push([\'forgetUserOptOut\'])', $content);
 	}
 }
