@@ -25,7 +25,7 @@ class MatomoConfigTest extends SapphireTest
 {
 	protected static $fixture_file = '../fixtures.yml';
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->logOut();
 	}
@@ -108,7 +108,7 @@ class MatomoConfigTest extends SapphireTest
 	}
 
 	private function assertContainsOptOutIframe($content) {
-		$this->assertContains('<iframe src="https://matomo.example.com/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=en"></iframe>', $content);
+        $this->assertStringContainsString('<iframe src="https://matomo.example.com/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=en" class="matomo-optout-iframe"></iframe>', $content);
 	}
 
 	/**
@@ -133,8 +133,8 @@ class MatomoConfigTest extends SapphireTest
 	}
 
 	private function assertContainsOptOutScript($content) {
-		$this->assertContains('<div id="matomo-optout-form">', $content);
-		$this->assertContains('<script>', $content);
-		$this->assertContains('_paq.push([\'forgetUserOptOut\'])', $content);
+		$this->assertStringContainsString('<div class="matomo-optout-form">', $content);
+		$this->assertStringContainsString('<script>', $content);
+		$this->assertStringContainsString('_paq.push([\'forgetUserOptOut\'])', $content);
 	}
 }
