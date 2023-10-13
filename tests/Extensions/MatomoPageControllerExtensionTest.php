@@ -25,7 +25,7 @@ class MatomoPageControllerExtensionTest extends FunctionalTest
 
 	protected static $fixture_file = '../fixtures.yml';
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 		$page = $this->objFromFixture('Page', 'home');
 		$page->publishRecursive();
@@ -54,7 +54,7 @@ class MatomoPageControllerExtensionTest extends FunctionalTest
 	 */
 	public function testTrackingCodeFound() {
 		$this->get('/');
-		$this->assertNotEmpty($this->findTrackingCode());
+		$this->assertNotNull($this->findTrackingCode());
 
 		Config::modify()->set(MatomoConfig::class, 'auto_add_tracking_head', false);
 		$this->get('/');
@@ -67,7 +67,7 @@ class MatomoPageControllerExtensionTest extends FunctionalTest
 	public function testTrackingCodeContainsProperties() {
 		$this->get('/');
 		$code = $this->findTrackingCode();
-		$this->assertContains('u="//matomo.example.com/"', $code->asXML());
-		$this->assertContains("['setSiteId', '1']", $code->asXML());
+		$this->assertStringContainsString('u="//matomo.example.com/"', $code->asXML());
+		$this->assertStringContainsString("['setSiteId', '1']", $code->asXML());
 	}
 }
