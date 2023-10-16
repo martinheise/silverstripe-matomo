@@ -8,8 +8,8 @@ compare https://developer.matomo.org/guides/tracking-javascript-guide#optional-c
         <label for="optout" class="right"><% if not $SiteConfig.UseMatomo %><%t Mhe\Matomo\Extensions\MatomoConfig.TRACKING_DEACTIVATED 'Tracking is currently not active'%><% end_if %></label>
     </div>
 </div>
-<script>
 <% if $SiteConfig.UseMatomo %>
+<script>
     document.addEventListener("DOMContentLoaded", function(event) {
     function setOptOutText(element) {
         _paq.push([function() {
