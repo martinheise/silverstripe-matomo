@@ -20,9 +20,9 @@ Requires Silverstripe 6.x – for a version compatible with Silverstripe 5 see r
 - Site ID
  
 ### Developer configuration (YAML)
-- *MatomoConfig.track_cms_users*: Track CMS users (with permission CMS_ACCESS_CMSMain) (default: *false*)
-- *MatomoConfig.auto_add_tracking_head*: add the tracking code to HTML head part – no modifications of the page template(s) needed (default: *true*)
-- *MatomoConfig.optout*: configuration of opt-out code, array with sub properties:
+- *Mhe\Matomo\Extensions\MatomoConfig.track_cms_users*: Track CMS users (with permission CMS_ACCESS_CMSMain) (default: *false*)
+- *Mhe\Matomo\Extensions\MatomoConfig.auto_add_tracking_head*: add the tracking code to HTML head part – no modifications of the page template(s) needed (default: *true*)
+- *Mhe\Matomo\Extensions\MatomoConfig.optout*: configuration of opt-out code, array with sub properties:
     - *method*, either 'script' (default) or 'iframe'
     
 ### Customizable templates
