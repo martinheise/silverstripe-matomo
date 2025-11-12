@@ -5,7 +5,11 @@ Add support for Matomo analytics tool to a Silverstripe installation.
 - The specific setup is done via SiteConfig
 - logged in backend users are excluded from tracking (configurable)
 - insert opt-out code into template or simply into page content via shortcode 
-- opt-out supports inlined form/JavaScript (default) or Mataomo-standard iframe
+- opt-out supports inlined form/JavaScript (default) or Matomo-standard iframe
+
+## Requirements
+
+Requires Silverstripe 6.x – for a version compatible with Silverstripe 5 see respective branch `5`
 
 ## Configuration
 
